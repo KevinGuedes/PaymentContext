@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaymentContext.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace PaymentContext.Domain.Entities
 {
     public class PayPalPayment : Payment
     {
-        public PayPalPayment(string transactionCode, DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, string document, string address, string email)
-            : base(paidDate, expirationDate, total, totalPaid, payer, document, address, email)
+        public PayPalPayment(string transactionCode, DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, Document document, Email email, string address)
+            : base(paidDate, expirationDate, total, totalPaid, payer, document, email, address)
         {
             TransactionCode = transactionCode;
         }
