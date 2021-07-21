@@ -1,4 +1,5 @@
 ﻿using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PaymentContext.Domain.Entities
 {
-    public class Student
+    public class Student : Entity
     {
         private IList<Subscription> _subscriptions;
 
@@ -25,7 +26,7 @@ namespace PaymentContext.Domain.Entities
 
         public Email Email { get; private set; }
      
-        public string Address { get; private set; }
+        public Address Address { get; private set; }
 
         public IReadOnlyCollection<Subscription> Subscriptions { get { return _subscriptions.ToList(); } }
 

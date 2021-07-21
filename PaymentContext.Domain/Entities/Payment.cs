@@ -9,7 +9,7 @@ namespace PaymentContext.Domain.Entities
 {
     public abstract class Payment
     {
-        protected Payment(DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, Document document, Email email, string address)
+        protected Payment(DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, Document document, Email email, Address address)
         {
             Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10).ToUpper();
             PaidDate = paidDate;
@@ -38,6 +38,6 @@ namespace PaymentContext.Domain.Entities
 
         public Email Email { get; private set; }
         
-        public string Address { get; private set; }
+        public Address Address { get; private set; }
     }
 }

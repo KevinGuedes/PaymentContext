@@ -9,7 +9,7 @@ namespace PaymentContext.Domain.Entities
 {
     public class BoletoPayment : Payment
     {
-        public BoletoPayment(string barCode, string number, DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, Document document, Email email, string address)
+        public BoletoPayment(string barCode, string number, DateTime paidDate, DateTime expirationDate, decimal total, decimal totalPaid, string payer, Document document, Email email, Address address)
             :base(paidDate, expirationDate, total, totalPaid, payer, document, email, address)
         {
             BarCode = barCode;
