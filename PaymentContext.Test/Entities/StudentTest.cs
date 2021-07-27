@@ -12,32 +12,52 @@ namespace PaymentContext.Test.Entities
 {
     public class StudentTest
     {
+        private readonly Name _name;
+        private readonly Email _email;
+        private readonly Document _document;
+        private readonly Address _address;
+        private readonly Student _student;
+        private readonly PayPalPayment _payPalPayment;
+        private readonly Subscription _subscription;
+
         public StudentTest()
         {
-            CreateValidStudent();
-        }
-
-        public Student ValidStudent { get; set; }
-
-        private void CreateValidStudent()
-        {
-            var name = new Name("Kevin", "Guedes");
-            var email = new Email("hello@gmail.com");
-            var document = new Document("98989698368", EDocumentType.CPF);
-
-            ValidStudent = new Student(name, document, email);
+            _name = new Name("Bruce", "Wayne");
+            _document = new Document("35111507795", EDocumentType.CPF);
+            _email = new Email("batman@dc.com");
+            _address = new Address("Rua 1", "1234", "Bairro Legal", "Gotham", "SP", "BR", "13400000");
+            _student = new Student(_name, _document, _email);
+            _payPalPayment = new PayPalPayment("12345678", DateTime.Now, DateTime.Now.AddDays(15), 10, 10, "WAYNE Corp.", _document, _email, _address); ;
+            _subscription = new Subscription(null);
         }
 
         [Fact]
-        public void ShouldReturnErrorWhenStudentNameIsInvalid()
+        public void ShouldReturnErrorWhenStudentHasActiveSubscription()
         {
-            var name = new Name("Kn", "Guedes");
-            var email = new Email("hello@gmail.com");
-            var document = new Document("98989698368", EDocumentType.CPF);
+            _subscription.AddPayment(_payPalPayment);
+            _student.AddSubscription(_subscription);
 
-            var student = new Student(name, document, email);
+           _student.AddSubscription(_subscription);
 
-            Assert.False(student.IsValid);
+            Assert.False(_student.IsValid);
+        }
+
+        [Fact]
+        public void ShouldNotReturnErrorWhenStudentDoesNotHaveActiveSubscription()
+        {
+            _subscription.AddPayment(_payPalPayment);
+
+            _student.AddSubscription(_subscription);
+
+            Assert.True(_student.IsValid);
+        }
+
+        [Fact]
+        public void ShouldReturnErrorWhenNewSubscriptionHasNoPayments()
+        {
+            _student.AddSubscription(_subscription);
+
+            Assert.False(_student.IsValid);
         }
     }
 }
