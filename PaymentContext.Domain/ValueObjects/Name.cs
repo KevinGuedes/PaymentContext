@@ -1,4 +1,5 @@
-﻿using Flunt.Validations;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
 using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
@@ -10,7 +11,7 @@ namespace PaymentContext.Domain.ValueObjects
             FirstName = firstName;
             LastName = lastName;
 
-            AddNotifications(new Contract<Name>()
+            AddNotifications(new Contract<Notification>()
                .Requires()
                .IsLowerThan(FirstName, 40, "Name.FirstName", "Name should have no more than 40 chars")
                .IsGreaterThan(FirstName, 3, "Name.FirstName", "Name should have at least 3 chars")

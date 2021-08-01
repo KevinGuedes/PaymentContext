@@ -1,4 +1,5 @@
-﻿using Flunt.Validations;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
 using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
@@ -15,7 +16,7 @@ namespace PaymentContext.Domain.ValueObjects
             Country = country;
             ZipCode = zipCode;
 
-            AddNotifications(new Contract<Address>()
+            AddNotifications(new Contract<Notification>()
                .Requires()
                .IsGreaterThan(Street, 3, "Address.Street", "Street should have at least 3 chars")
                //and other validations

@@ -1,4 +1,5 @@
-﻿using Flunt.Validations;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
 using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Shared.Entities;
 using System;
@@ -19,7 +20,7 @@ namespace PaymentContext.Domain.Entities
             Email = email;
             Address = address;
 
-            AddNotifications(new Contract<Payment>()
+            AddNotifications(new Contract<Notification>()
                 .Requires()
                 .IsLowerOrEqualsThan(0, Total, "Payment.Total", "Total must not be 0")
                 .IsGreaterOrEqualsThan(Total, TotalPaid, "Payment.TotalPaid", "Paid value is lower than the total value")

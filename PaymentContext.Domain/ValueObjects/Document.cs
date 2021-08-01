@@ -1,4 +1,5 @@
-﻿using Flunt.Validations;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Shared.ValueObjects;
 
@@ -11,7 +12,7 @@ namespace PaymentContext.Domain.ValueObjects
             Number = number;
             Type = type;
 
-            AddNotifications(new Contract<Document>()
+            AddNotifications(new Contract<Notification>()
                 .Requires()
                 .IsTrue(Validate(), "Document.Number", "Invalid document")
             );

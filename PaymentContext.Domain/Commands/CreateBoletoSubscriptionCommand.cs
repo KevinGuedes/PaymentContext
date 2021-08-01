@@ -1,4 +1,7 @@
-﻿using PaymentContext.Domain.Enums;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PaymentContext.Domain.Commands
 {
-    public class CreateBoletoSubscriptionCommand
+    public class CreateBoletoSubscriptionCommand : Notifiable<Notification>, ICommand
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -31,5 +34,16 @@ namespace PaymentContext.Domain.Commands
         public string State { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
+
+        public void Validate()
+        {
+            AddNotifications(new Contract<Notification>()
+              .Requires()
+              .IsLowerThan(FirstName, 40, "Name.FirstName", "Name should have no more than 40 chars")
+              .IsGreaterThan(FirstName, 3, "Name.FirstName", "Name should have at least 3 chars")
+              .IsGreaterThan(LastName, 3, "Name.FirstName", "Name should have at least 3 chars")
+           );
+            //if VOs were used, it would be possible to add notifications from the VOs (See Student entity)
+        }
     }
 }
