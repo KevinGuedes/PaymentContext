@@ -8,6 +8,6 @@ namespace PaymentContext.Domain.Repositories
 
         bool EmailExists(string email);
 
-        bool CreateSubscription(Student student);
+        void CreateSubscription(Student student);
     }
 }

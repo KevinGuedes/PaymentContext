@@ -9,10 +9,6 @@ using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Shared.Commands;
 using PaymentContext.Shared.Handlers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaymentContext.Domain.Handlers
 {
@@ -43,7 +39,7 @@ namespace PaymentContext.Domain.Handlers
 
             AddNotifications(new Contract<Notification>()
              .Requires()
-             .IsFalse(_studentRepository.EmailExists(command.Document), "Email", "Email already in use")
+             .IsFalse(_studentRepository.EmailExists(command.Email), "Email", "Email already in use")
            );
 
             var name = new Name(command.FirstName, command.LastName);
